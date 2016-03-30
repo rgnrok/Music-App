@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">YandexMusicSchool</string>
+    <string name="artist_image_description">Artist Image</string>
+    <string name="menu_refresh">Refresh</string>
+</resources>
