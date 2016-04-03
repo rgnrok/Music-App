@@ -11,16 +11,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.pgorbach.yandexmusicschool.adapters.ArtistAdapter;
 import com.example.pgorbach.yandexmusicschool.api.ApiFactory;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
 import com.orhanobut.logger.Logger;
 
+import java.util.List;
+
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Bind(R.id.artist_list)
     RecyclerView mRvArtists;
@@ -28,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.swiperefresh)
     SwipeRefreshLayout mRefreshLayout;
 
-    private RecyclerView.Adapter mArtistAdapter;
+    private ArtistAdapter mArtistAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
@@ -36,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
 
         mRvArtists.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -46,13 +56,11 @@ public class MainActivity extends AppCompatActivity {
         // specify an adapter (see also next example)
         mArtistAdapter = new ArtistAdapter();
         mRvArtists.setAdapter(mArtistAdapter);
-
-
+        updateList();
         mRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        Logger.d("onRefresh called from SwipeRefreshLayout");
 
                         // This method performs the actual data-refresh operation.
                         // The method calls setRefreshing(false) when it's finished.
@@ -73,7 +81,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void updateList() {
-//        Call<Artist> call = ApiFactory.getArtistService().listArtists();
+        Call<List<Artist>> call = ApiFactory.getArtistService(this).listArtists();
+        call.enqueue(new Callback<List<Artist>>() {
+            @Override
+            public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
+                if (response.isSuccessful()) {
+                    mArtistAdapter.clear();
+                    mArtistAdapter.addAll(response.body());
+                    mRefreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Artist>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.sync_error), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -92,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_refresh) {
+            updateList();
             return true;
         }
 

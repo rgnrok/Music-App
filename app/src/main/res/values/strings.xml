@@ -2,4 +2,21 @@
     <string name="app_name">YandexMusicSchool</string>
     <string name="artist_image_description">Artist Image</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="sync_error">Synchronisation error</string>
+    <string name="artist_description_label">Биография</string>
+
+    <plurals name="albums_count">
+        <item quantity="one">%d album</item>
+        <item quantity="few">%d albums</item>
+        <item quantity="many">%d albums</item>
+        <item quantity="other">%d albums</item>
+    </plurals>
+
+    <plurals name="tracks_count">
+        <item quantity="one">%d song</item>
+        <item quantity="few">%d songs</item>
+        <item quantity="many">%d songs</item>
+        <item quantity="other">%d songs</item>
+    </plurals>
+
 </resources>
