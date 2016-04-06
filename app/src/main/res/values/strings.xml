@@ -4,6 +4,8 @@
     <string name="menu_refresh">Refresh</string>
     <string name="sync_error">Synchronisation error</string>
     <string name="artist_description_label">Биография</string>
+    <string name="search_hint">hint</string>
+    <string name="menu_search">search</string>
 
     <plurals name="albums_count">
         <item quantity="one">%d album</item>

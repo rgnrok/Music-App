@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,6 +41,9 @@ import butterknife.ButterKnife;
 public class DetailActivity extends AppCompatActivity {
 
     public static final String ARG_ARTIST = "artist";
+    private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
+    private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.customtabs.extra.TOOLBAR_COLOR";
+
 
     @Bind(R.id.detail_toolbar)
     Toolbar mToolbar;
@@ -58,6 +63,9 @@ public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.artist_desc)
     TextView mTvArtistDescription;
 
+    @Bind(R.id.fab)
+    FloatingActionButton fabLink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,47 +78,64 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Artist mArtist =  getIntent().getParcelableExtra(DetailActivity.ARG_ARTIST);
+        // Create the detail fragment and add it to the activity
+        // using a fragment transaction.
+        final Artist mArtist = getIntent().getParcelableExtra(DetailActivity.ARG_ARTIST);
 
-            if (mArtist != null) {
-                mCollapsingToolbar.setTitle(mArtist.name);
-                mTvGenres.setText(mArtist.getGenresAsString());
-                mTvArtistDescription.setText(mArtist.description + mArtist.description + mArtist.description + mArtist.description);
+        if (mArtist != null) {
+            mCollapsingToolbar.setTitle(mArtist.name);
+            mTvGenres.setText(mArtist.getGenresAsString());
+            mTvArtistDescription.setText(mArtist.description + mArtist.description + mArtist.description + mArtist.description);
 
-                StringBuilder mBuilder = new StringBuilder();
-                mBuilder.setLength(0);
-                mBuilder.append(getResources().getQuantityString(R.plurals.albums_count, mArtist.albums, mArtist.albums))
-                        .append(',')
-                        .append(getResources().getQuantityString(R.plurals.tracks_count, mArtist.tracks, mArtist.tracks));
-                mTvTracks.setText(mBuilder.toString());
+            StringBuilder mBuilder = new StringBuilder();
+            mBuilder.setLength(0);
+            mBuilder.append(getResources().getQuantityString(R.plurals.albums_count, mArtist.albums, mArtist.albums))
+                    .append(',')
+                    .append(getResources().getQuantityString(R.plurals.tracks_count, mArtist.tracks, mArtist.tracks));
+            mTvTracks.setText(mBuilder.toString());
 
-                Glide.with(this)
-                        .load(mArtist.cover.get(Artist.COVER_BIG))
-                        .asBitmap()
-                        .centerCrop()
-                        .into(new BitmapImageViewTarget(mIvArtistImage) {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
-                        super.onResourceReady(bitmap, anim);
+            Glide.with(this)
+                    .load(mArtist.cover.get(Artist.COVER_BIG))
+                    .asBitmap()
+                    .centerCrop()
+                    .into(new BitmapImageViewTarget(mIvArtistImage) {
+                        @Override
+                        public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                            super.onResourceReady(bitmap, anim);
 
-                        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-                            @SuppressWarnings("ResourceType")
-                            @Override
-                            public void onGenerated(Palette palette) {
+                            Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                                @SuppressWarnings("ResourceType")
+                                @Override
+                                public void onGenerated(Palette palette) {
 
-                                int mutedColor = palette.getMutedColor(R.color.colorPrimary);
-                                mCollapsingToolbar.setContentScrimColor(mutedColor);
-                                mCollapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
-                            }
-                        });
-                    }
-                });
+                                    int mutedColor = palette.getMutedColor(R.color.colorPrimary);
+                                    mCollapsingToolbar.setContentScrimColor(mutedColor);
+                                    mCollapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
+                                }
+                            });
+                        }
+                    });
 
-            }
+            fabLink.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                    builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+                    builder.setShowTitle(true);
+//                    builder.setCloseButtonIcon(backIcon);
+// Application exit animation, Chrome enter animation.
+//                    builder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
+// vice versa
+//                    builder.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
 
-            }
+                    CustomTabsIntent customTabsIntent = builder.build();
+                    customTabsIntent.launchUrl(DetailActivity.this, Uri.parse(mArtist.link));
+                }
+            });
+
+        }
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
