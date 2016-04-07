@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/ArtistItem">
 
     <ImageView
         android:id="@+id/artist_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:contentDescription="@string/artist_image_description"
+        style="@style/ArtistImageTumb"
         tools:src="@drawable/test"
         />
 
@@ -22,6 +24,7 @@
         android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
         tools:text="Егор Крид"
+        style="@style/ArtistTitle"
         />
 
     <TextView
@@ -32,16 +35,18 @@
         android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
         tools:text="pop, rnb, rap"
+        style="@style/ArtistSubText"
         />
 
     <TextView
         android:id="@+id/artist_tracks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/artist_genres"
+        android:layout_alignBottom="@+id/artist_image"
         android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
         tools:text="22 альбома, 57 песен"
+        style="@style/ArtistSubText"
         />
 
 </RelativeLayout>

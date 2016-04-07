@@ -14,4 +14,41 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Text">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="SubText">
+        <item name="android:textSize">@dimen/sub_text_size</item>
+        <item name="android:textColor">@color/subText</item>
+    </style>
+
+    <style name="ArtistItem">
+        <item name="android:padding">@dimen/list_item_padding</item>
+    </style>
+
+    <style name="ArtistImageTumb">
+        <item name="android:layout_width">@dimen/image_tumb_size</item>
+        <item name="android:layout_height">@dimen/image_tumb_size</item>
+        <item name="android:layout_marginRight">@dimen/image_margin</item>
+    </style>
+
+
+    <style name="ArtistTitle" parent="Text">
+        <item name="android:textSize">@dimen/artist_title_size</item>
+        <item name="android:layout_marginTop">@dimen/artist_title_margin</item>
+        <item name="android:layout_marginBottom">@dimen/artist_title_margin</item>
+    </style>
+
+    <style name="ArtistSubText"  parent="SubText">
+        <item name="android:textSize">@dimen/artist_sub_text_size</item>
+        <item name="android:layout_marginTop">@dimen/artist_sub_text_margin</item>
+        <item name="android:layout_marginBottom">@dimen/artist_sub_text_margin</item>
+    </style>
+
+    <style name="ArtistInfo" parent="Text">
+    </style>
+
+
 </resources>

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout mRefreshLayout;
 
     private ArtistAdapter mArtistAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
 
     @Override
@@ -55,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         mRvArtists.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRvArtists.setLayoutManager(mLayoutManager);
+        mRvArtists.addItemDecoration(new SimpleDividerItemDecoration(this));
+        mRvArtists.setLayoutManager(new LinearLayoutManager(this));
 
         // specify an adapter (see also next example)
         mArtistAdapter = new ArtistAdapter();
