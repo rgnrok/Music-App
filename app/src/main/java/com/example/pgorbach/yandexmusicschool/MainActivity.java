@@ -122,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                Logger.e("onQueryTextChange " + newText);
-                Logger.e(newText);
+            public boolean onQueryTextChange(String text) {
+                mArtistAdapter.getFilter().filter(text);
+                Logger.e("onQueryTextChange " + text);
                 return false;
             }
         });
