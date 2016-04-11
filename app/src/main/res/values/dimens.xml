@@ -15,5 +15,5 @@
     <dimen name="sub_text_size">16sp</dimen>
 
     <dimen name="image_margin">15dp</dimen>
-    <dimen name="image_tumb_size">120dp</dimen>
+    <dimen name="image_tumb_size">100dp</dimen>
 </resources>

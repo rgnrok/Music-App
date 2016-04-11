@@ -50,7 +50,7 @@ public class ApiFactory {
                         Request originalRequest = chain.request();
                         String cacheHeaderValue = Helper.isNetworkAvailable(context)
                                 ? "public, max-age=2419200"
-                                : "public, only-if-cached, max-stale=2419200" ;
+                                : "public, only-if-cached, max-stale=2419200";
                         Request request = originalRequest.newBuilder().build();
                         Response response = chain.proceed(request);
                         return response.newBuilder()
@@ -68,7 +68,7 @@ public class ApiFactory {
                         Request originalRequest = chain.request();
                         String cacheHeaderValue = Helper.isNetworkAvailable(context)
                                 ? "public, max-age=2419200"
-                                : "public, only-if-cached, max-stale=2419200" ;
+                                : "public, only-if-cached, max-stale=2419200";
                         Request request = originalRequest.newBuilder().build();
                         Response response = chain.proceed(request);
                         return response.newBuilder()
@@ -100,7 +100,7 @@ public class ApiFactory {
             int cacheSize = 10 * 1024 * 1024; // 10 MiB
             Cache cache = new Cache(httpCacheDirectory, cacheSize);
 
-//add cache to the client
+            //add cache to the client
             builder.cache(cache);
             CLIENT = builder.build();
 

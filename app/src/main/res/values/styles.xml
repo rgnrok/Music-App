@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccentTransparent</item>
+
+
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -26,11 +29,12 @@
 
     <style name="ArtistItem">
         <item name="android:padding">@dimen/list_item_padding</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
     <style name="ArtistImageTumb">
-        <item name="android:layout_width">@dimen/image_tumb_size</item>
-        <item name="android:layout_height">@dimen/image_tumb_size</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">125dp</item>
         <item name="android:layout_marginRight">@dimen/image_margin</item>
     </style>
 

@@ -4,5 +4,26 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <!-- enable window content transitions -->
+        <item name="android:windowContentTransitions">false</item>
+
+        <!-- specify enter and exit transitions -->
+        <!--<item name="android:windowEnterTransition">@android:transition/fade</item>-->
+        <!--<item name="android:windowExitTransition">@android:transition/fade</item>-->
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/your_transition</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/your_transition</item>
+
+
+
+    </style>
+
+    <style name="ArtistItem">
+        <item name="android:padding">@dimen/list_item_padding</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
     </style>
 </resources>
