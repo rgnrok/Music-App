@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Яндекс музыка</string>
+    <string name="artist_image_description">Изображение артиста</string>
+    <string name="menu_refresh">Обновить</string>
+    <string name="sync_error">Ошибка подключения. Проверьте наличие интернета и повторите попытку</string>
+    <string name="artist_description_label">Биография</string>
+    <string name="menu_search">Поиск</string>
+
+    <plurals name="albums_count">
+        <item quantity="one">%d альбом</item>
+        <item quantity="few">%d альбома</item>
+        <item quantity="many">%d альбомов</item>
+        <item quantity="other">%d альбомов</item>
+    </plurals>
+
+    <plurals name="tracks_count">
+        <item quantity="one">%d песня</item>
+        <item quantity="few">%d песни</item>
+        <item quantity="many">%d песен</item>
+        <item quantity="other">%d песен</item>
+    </plurals>
+
+</resources>

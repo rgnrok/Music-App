@@ -87,7 +87,7 @@ public class DetailActivity extends AppCompatActivity {
         if (mArtist != null) {
             mCollapsingToolbar.setTitle(mArtist.name);
             mTvGenres.setText(mArtist.getGenresAsString());
-            mTvArtistDescription.setText(mArtist.description + mArtist.description + mArtist.description + mArtist.description);
+            mTvArtistDescription.setText(mArtist.description);
 
             StringBuilder mBuilder = new StringBuilder();
             mBuilder.setLength(0);
@@ -150,8 +150,11 @@ public class DetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-//            NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
-            finishAfterTransition();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAfterTransition();
+            } else {
+                NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

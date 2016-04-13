@@ -130,7 +130,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         StringBuilder mBuilder = new StringBuilder();
         mBuilder.setLength(0);
         mBuilder.append(holder.mContext.getResources().getQuantityString(R.plurals.albums_count, mArtist.albums, mArtist.albums))
-                .append(',')
+                .append(", ")
                 .append(holder.mContext.getResources().getQuantityString(R.plurals.tracks_count, mArtist.tracks, mArtist.tracks));
         holder.mTvArtistTracks.setText(mBuilder.toString());
 

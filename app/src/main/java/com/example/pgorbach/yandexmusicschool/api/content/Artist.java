@@ -41,8 +41,11 @@ public class Artist implements Parcelable {
 
     public String getGenresAsString() {
         StringBuilder mBuilder = new StringBuilder();
-        for (String genre : genres) {
-            mBuilder.append(genre);
+        if (genres.length > 0) {
+            mBuilder.append(genres[0]);
+            for (int i = 1; i < genres.length; i++) {
+                mBuilder.append(", ").append(genres[i]);
+            }
         }
         return mBuilder.toString();
     }

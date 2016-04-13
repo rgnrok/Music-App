@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Artist>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.sync_error), Toast.LENGTH_SHORT).show();
+                mRefreshLayout.setRefreshing(false);
             }
         });
     }

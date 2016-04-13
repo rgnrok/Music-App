@@ -42,7 +42,6 @@
     <style name="ArtistTitle" parent="Text">
         <item name="android:textSize">@dimen/artist_title_size</item>
         <item name="android:layout_marginTop">@dimen/artist_title_margin</item>
-        <item name="android:layout_marginBottom">@dimen/artist_title_margin</item>
     </style>
 
     <style name="ArtistSubText"  parent="SubText">

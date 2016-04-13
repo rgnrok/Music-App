@@ -23,7 +23,7 @@ public class Helper {
         if (netType == ConnectivityManager.TYPE_WIFI) {
             return info.isConnected();
 
-        } else if (netType == ConnectivityManager.TYPE_MOBILE  && !mTelephony.isNetworkRoaming()) {
+        } else if (netType == ConnectivityManager.TYPE_MOBILE) {
             return info.isConnected();
         }
         return false;
