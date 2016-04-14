@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="app_bar_height">300dp</dimen>
+    <dimen name="app_bar_height">330dp</dimen>
 
     <dimen name="list_item_padding">20dp</dimen>
     <dimen name="artist_title_size">24sp</dimen>
@@ -15,5 +15,6 @@
     <dimen name="sub_text_size">16sp</dimen>
 
     <dimen name="image_margin">15dp</dimen>
-    <dimen name="image_tumb_size">100dp</dimen>
+    <dimen name="image_tumb_width">150dp</dimen>
+    <dimen name="image_tumb_height">140dp</dimen>
 </resources>

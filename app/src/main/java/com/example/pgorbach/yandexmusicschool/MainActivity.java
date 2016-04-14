@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
+        final MenuItem refreshItem = menu.findItem(R.id.menu_refresh);
 
         MenuItem searchViewItem = menu.findItem(R.id.action_search);
         final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
@@ -126,14 +127,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchViewAndroidActionBar.clearFocus();
-                Logger.e("onQueryTextSubmit " + query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String text) {
                 mArtistAdapter.getFilter().filter(text);
-                Logger.e("onQueryTextChange " + text);
                 return false;
             }
         });
@@ -145,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         // Return true to allow the action view to expand
                         Logger.e("onMenuItemActionExpand");
                         mRefreshLayout.setEnabled(false);
+                        refreshItem.setEnabled(false);
                         return true;
                     }
 
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         // When the action view is collapsed, reset the query
                         Logger.e("onMenuItemActionCollapse");
                         mRefreshLayout.setEnabled(true);
+                        refreshItem.setEnabled(true);
                         // Return true to allow the action view to collapse
                         return true;
                     }

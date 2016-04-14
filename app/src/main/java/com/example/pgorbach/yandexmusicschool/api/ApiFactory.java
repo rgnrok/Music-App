@@ -24,9 +24,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiFactory {
+
     private static final boolean DEBUG = true;
+    private static final boolean USE_CACHE = true;
+
     private static final int CONNECT_TIMEOUT = 10;
     private static final int READ_TIMEOUT = 60;
+    private static final int CACHE_SIZE = 2 * 1024 * 1024;
 
     private static OkHttpClient CLIENT;
     private static final String API_ENDPOINT = "http://download.cdn.yandex.net/mobilization-2016/";
@@ -37,50 +41,6 @@ public class ApiFactory {
         return getRetrofit(context).create(ArtistService.class);
     }
 
-    public static OkHttpClient createCachedClient(final Context context) {
-        File httpCacheDirectory = new File(context.getCacheDir(), "cache_file");
-
-        Cache cache = new Cache(httpCacheDirectory, 20 * 1024 * 1024);
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.cache(cache);
-        builder.interceptors().add(
-                new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request originalRequest = chain.request();
-                        String cacheHeaderValue = Helper.isNetworkAvailable(context)
-                                ? "public, max-age=2419200"
-                                : "public, only-if-cached, max-stale=2419200";
-                        Request request = originalRequest.newBuilder().build();
-                        Response response = chain.proceed(request);
-                        return response.newBuilder()
-                                .removeHeader("Pragma")
-                                .removeHeader("Cache-Control")
-                                .header("Cache-Control", cacheHeaderValue)
-                                .build();
-                    }
-                }
-        );
-        builder.networkInterceptors().add(
-                new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request originalRequest = chain.request();
-                        String cacheHeaderValue = Helper.isNetworkAvailable(context)
-                                ? "public, max-age=2419200"
-                                : "public, only-if-cached, max-stale=2419200";
-                        Request request = originalRequest.newBuilder().build();
-                        Response response = chain.proceed(request);
-                        return response.newBuilder()
-                                .removeHeader("Pragma")
-                                .removeHeader("Cache-Control")
-                                .header("Cache-Control", cacheHeaderValue)
-                                .build();
-                    }
-                }
-        );
-        return builder.build();
-    }
 
     @NonNull
     private static Retrofit getRetrofit(Context context) {
@@ -94,16 +54,15 @@ public class ApiFactory {
             if (DEBUG) {
                 builder.addInterceptor(new LogInterceptor());
             }
-            builder.addInterceptor(new CacheInterceptor(context));
-            //setup cache
-            File httpCacheDirectory = new File(context.getCacheDir(), "responses");
-            int cacheSize = 10 * 1024 * 1024; // 10 MiB
-            Cache cache = new Cache(httpCacheDirectory, cacheSize);
+            if (USE_CACHE && context != null) {
+                File httpCacheDirectory = new File(context.getCacheDir(), "cache_file");
 
-            //add cache to the client
-            builder.cache(cache);
+                Cache cache = new Cache(httpCacheDirectory, CACHE_SIZE);
+                builder.cache(cache);
+                builder.addNetworkInterceptor(new CacheInterceptor(context));
+            }
+
             CLIENT = builder.build();
-
         }
 
         Gson GSON = new GsonBuilder()
@@ -123,8 +82,7 @@ public class ApiFactory {
         return new Retrofit.Builder()
                 .baseUrl(API_ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create(GSON))
-
-                .client(createCachedClient(context))
+                .client(CLIENT)
                 .build();
     }
 }

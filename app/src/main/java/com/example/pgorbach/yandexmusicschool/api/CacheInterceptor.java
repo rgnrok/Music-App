@@ -7,6 +7,7 @@ import com.example.pgorbach.yandexmusicschool.helpers.Helper;
 import java.io.IOException;
 
 import okhttp3.Interceptor;
+import okhttp3.Request;
 import okhttp3.Response;
 
 public class CacheInterceptor implements Interceptor {
@@ -19,17 +20,16 @@ public class CacheInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Response originalResponse = chain.proceed(chain.request());
-        if (Helper.isNetworkAvailable(mContext)) {
-            int maxAge = 60; // read from cache for 1 minute
-            return originalResponse.newBuilder()
-                    .header("Cache-Control", "public, max-age=" + maxAge)
-                    .build();
-        } else {
-            int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
-            return originalResponse.newBuilder()
-                    .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                    .build();
-        }
+        Request originalRequest = chain.request();
+        String cacheHeaderValue = Helper.isNetworkAvailable(mContext)
+                ? "public, max-age=2419200"
+                : "public, only-if-cached, max-stale=2419200";
+        Request request = originalRequest.newBuilder().build();
+        Response response = chain.proceed(request);
+        return response.newBuilder()
+                .removeHeader("Pragma")
+                .removeHeader("Cache-Control")
+                .header("Cache-Control", cacheHeaderValue)
+                .build();
     }
 }

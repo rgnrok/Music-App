@@ -10,7 +10,6 @@ public class Helper {
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager mConnectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        TelephonyManager mTelephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
         // Skip if no connection, or background data disabled
         NetworkInfo info = mConnectivity.getActiveNetworkInfo();

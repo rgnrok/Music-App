@@ -56,6 +56,9 @@ public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.header_image)
     ImageView mIvArtistImage;
 
+    @Bind(R.id.header_image_gradient)
+    View mArtistImageGradient;
+
     @Bind(R.id.artist_genres)
     TextView mTvGenres;
 
@@ -92,7 +95,7 @@ public class DetailActivity extends AppCompatActivity {
             StringBuilder mBuilder = new StringBuilder();
             mBuilder.setLength(0);
             mBuilder.append(getResources().getQuantityString(R.plurals.albums_count, mArtist.albums, mArtist.albums))
-                    .append(',')
+                    .append(", ")
                     .append(getResources().getQuantityString(R.plurals.tracks_count, mArtist.tracks, mArtist.tracks));
             mTvTracks.setText(mBuilder.toString());
 
@@ -104,7 +107,7 @@ public class DetailActivity extends AppCompatActivity {
                         @Override
                         public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
                             super.onResourceReady(bitmap, anim);
-
+                            mArtistImageGradient.setVisibility(View.VISIBLE);
                             Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
                                 @SuppressWarnings("ResourceType")
                                 @Override
@@ -124,12 +127,6 @@ public class DetailActivity extends AppCompatActivity {
                     CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                     builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
                     builder.setShowTitle(true);
-//                    builder.setCloseButtonIcon(backIcon);
-// Application exit animation, Chrome enter animation.
-//                    builder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
-// vice versa
-//                    builder.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
-
                     CustomTabsIntent customTabsIntent = builder.build();
                     customTabsIntent.launchUrl(DetailActivity.this, Uri.parse(mArtist.link));
                 }
