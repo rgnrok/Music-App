@@ -12,5 +12,11 @@
             <target android:targetId="@id/header_image" />
         </targets>
     </changeImageTransform>
+    <changeTransform>
+        <targets>
+            <target android:targetId="@id/artist_image" />
+            <target android:targetId="@id/header_image" />
+        </targets>
+    </changeTransform>
 
 </transitionSet>

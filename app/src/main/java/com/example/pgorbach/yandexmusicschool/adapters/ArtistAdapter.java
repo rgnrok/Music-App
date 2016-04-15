@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.pgorbach.yandexmusicschool.DetailActivity;
 import com.example.pgorbach.yandexmusicschool.MainActivity;
 import com.example.pgorbach.yandexmusicschool.R;
@@ -87,6 +88,8 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 mContext.startActivity(detailIntent, ActivityOptionsCompat.makeSceneTransitionAnimation((MainActivity) mContext, mIvArtistImage, "image_transition_view").toBundle());
+            } else {
+                mContext.startActivity(detailIntent);
             }
         }
     }
@@ -136,6 +139,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
                 .load(mArtist.cover.get(Artist.COVER_SMALL))
                 .centerCrop()
                 .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(holder.mIvArtistImage);
 
         setAnimation(holder.mRlWrapper, position);
