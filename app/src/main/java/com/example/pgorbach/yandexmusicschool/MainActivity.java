@@ -1,11 +1,7 @@
 package com.example.pgorbach.yandexmusicschool;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.MenuInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -53,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            getWindow().setAllowEnterTransitionOverlap(true);
         }
         super.onCreate(savedInstanceState);
 
@@ -81,15 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-
-                        // This method performs the actual data-refresh operation.
-                        // The method calls setRefreshing(false) when it's finished.
                         updateList();
                     }
                 }
         );
-
-
     }
 
     protected void updateList() {
@@ -142,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemActionExpand(MenuItem menuItem) {
                         // Return true to allow the action view to expand
-                        Logger.e("onMenuItemActionExpand");
                         mRefreshLayout.setEnabled(false);
                         refreshItem.setEnabled(false);
                         return true;
@@ -151,10 +138,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
                         // When the action view is collapsed, reset the query
-                        Logger.e("onMenuItemActionCollapse");
+                        // Return true to allow the action view to collapse
                         mRefreshLayout.setEnabled(true);
                         refreshItem.setEnabled(true);
-                        // Return true to allow the action view to collapse
                         return true;
                     }
                 });
@@ -165,9 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.menu_refresh:
                 updateList();

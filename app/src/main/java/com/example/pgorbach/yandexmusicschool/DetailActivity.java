@@ -80,11 +80,12 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         // Show the Up button in the action bar.
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
 
-        // Create the detail fragment and add it to the activity
-        // using a fragment transaction.
+        // Filling author info
         final Artist mArtist = getIntent().getParcelableExtra(DetailActivity.ARG_ARTIST);
 
         if (mArtist != null) {
@@ -112,7 +113,6 @@ public class DetailActivity extends AppCompatActivity {
                                 @SuppressWarnings("ResourceType")
                                 @Override
                                 public void onGenerated(Palette palette) {
-
                                     int mutedColor = palette.getMutedColor(R.color.colorPrimary);
                                     mCollapsingToolbar.setContentScrimColor(mutedColor);
                                     mCollapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
@@ -140,17 +140,11 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. Use NavUtils to allow users
-            // to navigate up one level in the application structure. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 finishAfterTransition();
             } else {
-                NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
+                finish();
             }
             return true;
         }

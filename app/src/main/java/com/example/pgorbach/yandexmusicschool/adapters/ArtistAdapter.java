@@ -113,7 +113,6 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.artist_item, parent, false);
-        // set the view's size, margins, paddings and layout parameters
         mContext = parent.getContext();
         return new ViewHolder(v, parent.getContext());
     }
@@ -128,13 +127,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         holder.mTvArtistGenres.setText(mArtist.getGenresAsString());
 
         StringBuilder mBuilder = new StringBuilder();
-        mBuilder.setLength(0);
         mBuilder.append(holder.mContext.getResources().getQuantityString(R.plurals.albums_count, mArtist.albums, mArtist.albums))
                 .append(", ")
                 .append(holder.mContext.getResources().getQuantityString(R.plurals.tracks_count, mArtist.tracks, mArtist.tracks));
         holder.mTvArtistTracks.setText(mBuilder.toString());
-
-        holder.mTvArtistName.setText(mArtist.name);
 
         Glide.with(holder.mContext)
                 .load(mArtist.cover.get(Artist.COVER_SMALL))
@@ -159,6 +155,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
      */
     private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
+
         if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
