@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
-        tools:text="Егор Крид"
+        tools:text="Richard Rodgers"
         style="@style/ArtistTitle"
         />
 
@@ -38,7 +38,7 @@
         android:layout_below="@+id/artist_name"
         android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
-        tools:text="pop, rnb, rap"
+        tools:text="classical, soundtrack, pop, rnb, rap"
         style="@style/ArtistSubText"
         />
 
@@ -46,10 +46,11 @@
         android:id="@+id/artist_tracks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/artist_image"
+        android:layout_below="@+id/artist_genres"
         android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
-        tools:text="22 альбома, 57 песен"
+        android:layout_alignParentBottom="true"
+        tools:text="122 альбома, 577 песен"
         style="@style/ArtistSubText"
         />
 

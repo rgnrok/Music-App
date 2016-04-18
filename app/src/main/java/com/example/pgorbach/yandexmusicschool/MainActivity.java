@@ -2,6 +2,7 @@ package com.example.pgorbach.yandexmusicschool;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.swiperefresh)
     SwipeRefreshLayout mRefreshLayout;
+
+    @Bind(R.id.fab_up)
+    FloatingActionButton fabUp;
 
     private ArtistAdapter mArtistAdapter;
 
@@ -78,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        fabUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRvArtists.scrollToPosition(0);
+            }
+        });
     }
 
     protected void updateList() {
@@ -89,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     Logger.e("updateList");
                     mArtistAdapter.clear();
                     mArtistAdapter.addAll(response.body());
+                    mRvArtists.scrollToPosition(0);
                     mRefreshLayout.setRefreshing(false);
                 }
             }
