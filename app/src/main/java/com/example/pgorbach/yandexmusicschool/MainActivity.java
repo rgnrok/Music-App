@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
 
         final MenuItem refreshItem = menu.findItem(R.id.menu_refresh);
-
-        MenuItem searchViewItem = menu.findItem(R.id.action_search);
+        final MenuItem searchViewItem = menu.findItem(R.id.action_search);
         final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
+
         searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Disable pull-refresh if searching
         MenuItemCompat.setOnActionExpandListener(searchViewItem,
                 new MenuItemCompat.OnActionExpandListener() {
                     @Override
