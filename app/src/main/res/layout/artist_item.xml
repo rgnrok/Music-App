@@ -1,57 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_item_wrapper"
+    style="@style/ArtistItem"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-
-    style="@style/ArtistItem">
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:transitionName="image_transition_view"
         android:id="@+id/artist_image"
-
-        android:layout_alignParentTop="true"
+        style="@style/ArtistImageTumb"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:contentDescription="@string/artist_image_description"
-        style="@style/ArtistImageTumb"
-        tools:src="@drawable/test"
-        />
+        android:transitionName="@string/artist_transition_name"
+        tools:src="@drawable/test" />
 
     <TextView
         android:id="@+id/artist_name"
+        style="@style/ArtistTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
-        tools:text="Richard Rodgers"
-        style="@style/ArtistTitle"
-        />
+        android:layout_toRightOf="@+id/artist_image"
+        tools:text="Richard Rodgers" />
 
     <TextView
         android:id="@+id/artist_genres"
+        style="@style/ArtistSubText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/artist_name"
-        android:layout_toRightOf="@+id/artist_image"
         android:layout_toEndOf="@+id/artist_image"
-        tools:text="classical, soundtrack, pop, rnb, rap"
-        style="@style/ArtistSubText"
-        />
+        android:layout_toRightOf="@+id/artist_image"
+        tools:text="classical, soundtrack, pop, rnb, rap" />
 
     <TextView
         android:id="@+id/artist_tracks"
+        style="@style/ArtistSubText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/artist_genres"
-        android:layout_toRightOf="@+id/artist_image"
-        android:layout_toEndOf="@+id/artist_image"
         android:layout_alignParentBottom="true"
-        tools:text="122 альбома, 577 песен"
-        style="@style/ArtistSubText"
-        />
+        android:layout_below="@+id/artist_genres"
+        android:layout_toEndOf="@+id/artist_image"
+        android:layout_toRightOf="@+id/artist_image"
+        tools:text="122 альбома, 577 песен" />
 
 </RelativeLayout>

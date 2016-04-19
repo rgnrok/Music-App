@@ -1,4 +1,4 @@
-package com.example.pgorbach.yandexmusicschool.api;
+package com.example.pgorbach.yandexmusicschool.api.services;
 
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
 

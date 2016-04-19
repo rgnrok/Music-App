@@ -4,22 +4,15 @@ package com.example.pgorbach.yandexmusicschool.api;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.example.pgorbach.yandexmusicschool.helpers.Helper;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.orhanobut.logger.Logger;
+import com.example.pgorbach.yandexmusicschool.api.interceptors.CacheInterceptor;
+import com.example.pgorbach.yandexmusicschool.api.interceptors.LogInterceptor;
+import com.example.pgorbach.yandexmusicschool.api.services.ArtistService;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -65,23 +58,10 @@ public class ApiFactory {
             CLIENT = builder.build();
         }
 
-        Gson GSON = new GsonBuilder()
-                .setExclusionStrategies(new ExclusionStrategy() {
-                    @Override
-                    public boolean shouldSkipField(FieldAttributes f) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean shouldSkipClass(Class<?> clazz) {
-                        return false;
-                    }
-                })
-                .create();
 
         return new Retrofit.Builder()
                 .baseUrl(API_ENDPOINT)
-                .addConverterFactory(GsonConverterFactory.create(GSON))
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(CLIENT)
                 .build();
     }

@@ -1,11 +1,14 @@
 <resources>
+    <string name="artist_transition_name">image_transition_view</string>
+
+
     <string name="app_name">Yandex Music School</string>
     <string name="artist_image_description">Artist Image</string>
     <string name="menu_refresh">Refresh</string>
     <string name="sync_error">Ошибка подключения. Проверьте наличие интернета и повторите попытку</string>
     <string name="artist_description_label">Биография</string>
     <string name="search_hint">hint</string>
-    <string name="menu_search">search</string>
+    <string name="menu_search">Search</string>
 
     <plurals name="albums_count">
         <item quantity="one">%d album</item>

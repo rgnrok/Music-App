@@ -1,10 +1,6 @@
 package com.example.pgorbach.yandexmusicschool;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +22,6 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
-import com.orhanobut.logger.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,9 +30,6 @@ import butterknife.ButterKnife;
 public class DetailActivity extends AppCompatActivity {
 
     public static final String ARG_ARTIST = "artist";
-    private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
-    private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.customtabs.extra.TOOLBAR_COLOR";
-
 
     @Bind(R.id.detail_toolbar)
     Toolbar mToolbar;
@@ -77,7 +69,6 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-
         // Filling author info
         final Artist mArtist = getIntent().getParcelableExtra(DetailActivity.ARG_ARTIST);
 
@@ -87,17 +78,16 @@ public class DetailActivity extends AppCompatActivity {
             mTvArtistDescription.setText(mArtist.description);
 
             StringBuilder mBuilder = new StringBuilder();
-            mBuilder.setLength(0);
             mBuilder.append(getResources().getQuantityString(R.plurals.albums_count, mArtist.albums, mArtist.albums))
                     .append(", ")
                     .append(getResources().getQuantityString(R.plurals.tracks_count, mArtist.tracks, mArtist.tracks));
             mTvTracks.setText(mBuilder.toString());
 
+            //Start animation transition after glide get response
             Glide.with(this)
                     .load(mArtist.cover.get(Artist.COVER_BIG))
                     .asBitmap()
                     .centerCrop()
-
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .listener(new RequestListener<String, Bitmap>() {
                         @Override
@@ -129,12 +119,15 @@ public class DetailActivity extends AppCompatActivity {
                         }
                     });
 
+            fabLink.setVisibility(mArtist.link != null ? View.VISIBLE : View.GONE);
             fabLink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //Open artist site
                     CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                     builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
                     builder.setShowTitle(true);
+
                     CustomTabsIntent customTabsIntent = builder.build();
                     customTabsIntent.launchUrl(DetailActivity.this, Uri.parse(mArtist.link));
                 }
@@ -148,7 +141,6 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 finishAfterTransition();
             } else {

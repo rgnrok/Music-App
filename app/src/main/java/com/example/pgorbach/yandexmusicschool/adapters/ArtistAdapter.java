@@ -1,12 +1,10 @@
 package com.example.pgorbach.yandexmusicschool.adapters;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +24,6 @@ import com.example.pgorbach.yandexmusicschool.R;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
 import com.orhanobut.logger.Logger;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -38,15 +35,14 @@ import butterknife.ButterKnife;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> implements Filterable {
 
-
     protected List<Artist> mItems;
     protected List<Artist> mFilteredItems;
     protected FilterFinishListener mFilterListener;
 
+    //Position for animation
     protected int lastPosition = -1;
-    protected Context mContext;
 
-
+    //Called when the available search results
     public interface FilterFinishListener {
         void onFilterFinish();
     }
@@ -83,11 +79,12 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
         @Override
         public void onClick(View v) {
+            //Open Detail activity with artist info
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
             detailIntent.putExtra(DetailActivity.ARG_ARTIST, mArtist);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mContext.startActivity(detailIntent, ActivityOptionsCompat.makeSceneTransitionAnimation((MainActivity) mContext, mIvArtistImage, "image_transition_view").toBundle());
+                mContext.startActivity(detailIntent, ActivityOptionsCompat.makeSceneTransitionAnimation((MainActivity) mContext, mIvArtistImage, mContext.getString(R.string.artist_transition_name)).toBundle());
             } else {
                 mContext.startActivity(detailIntent);
             }
@@ -116,15 +113,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.artist_item, parent, false);
-        mContext = parent.getContext();
         return new ViewHolder(v, parent.getContext());
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        Artist mArtist = mFilteredItems.get(position);
+        //Set artist info and load image
+        final Artist mArtist = mFilteredItems.get(position);
         holder.mArtist = mArtist;
         holder.mTvArtistName.setText(mArtist.name);
         holder.mTvArtistGenres.setText(mArtist.getGenresAsString());
@@ -142,7 +137,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(holder.mIvArtistImage);
 
-        setAnimation(holder.mRlWrapper, position);
+        setAnimation(holder.mRlWrapper, position, holder.mContext);
     }
 
     @Override
@@ -157,11 +152,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     /**
      * Here is the key method to apply the animation
      */
-    private void setAnimation(View viewToAnimate, int position) {
+    protected void setAnimation(View viewToAnimate, int position, Context context) {
         // If the bound view wasn't previously displayed on screen, it's animated
-
         if (position > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
@@ -185,17 +179,20 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    //For remove animation
     public Artist removeItem(int position) {
         final Artist model = mFilteredItems.remove(position);
         notifyItemRemoved(position);
         return model;
     }
 
+    //For insert animation
     public void addItem(int position, Artist model) {
         mFilteredItems.add(position, model);
         notifyItemInserted(position);
     }
 
+    //For move animation
     public void moveItem(int fromPosition, int toPosition) {
         final Artist model = mFilteredItems.remove(fromPosition);
         mFilteredItems.add(toPosition, model);
@@ -208,7 +205,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         applyAndAnimateMovedItems(models);
     }
 
-    private void applyAndAnimateRemovals(List<Artist> newModels) {
+    protected void applyAndAnimateRemovals(List<Artist> newModels) {
         for (int i = mFilteredItems.size() - 1; i >= 0; i--) {
             final Artist model = mFilteredItems.get(i);
             if (!newModels.contains(model)) {
@@ -217,7 +214,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         }
     }
 
-    private void applyAndAnimateAdditions(List<Artist> newModels) {
+    protected void applyAndAnimateAdditions(List<Artist> newModels) {
         for (int i = 0, count = newModels.size(); i < count; i++) {
             final Artist model = newModels.get(i);
             if (!mFilteredItems.contains(model)) {
@@ -226,7 +223,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         }
     }
 
-    private void applyAndAnimateMovedItems(List<Artist> newModels) {
+    protected void applyAndAnimateMovedItems(List<Artist> newModels) {
         for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
             final Artist model = newModels.get(toPosition);
             final int fromPosition = mFilteredItems.indexOf(model);
@@ -241,15 +238,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         return new ArtistFilter(this, mItems);
     }
 
-    private static class ArtistFilter extends Filter {
+    protected static class ArtistFilter extends Filter {
 
-        private final ArtistAdapter adapter;
+        protected final ArtistAdapter adapter;
+        protected final List<Artist> originalList;
+        protected final List<Artist> filteredList;
 
-        private final List<Artist> originalList;
-
-        private final List<Artist> filteredList;
-
-        private ArtistFilter(ArtistAdapter adapter, List<Artist> originalList) {
+        protected ArtistFilter(ArtistAdapter adapter, List<Artist> originalList) {
             super();
             this.adapter = adapter;
             this.originalList = new LinkedList<>(originalList);
@@ -258,23 +253,18 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-
+            final FilterResults results = new FilterResults();
             filteredList.clear();
 
-            final FilterResults results = new FilterResults();
-
+            //If search text is empty
             if (constraint.length() == 0) {
                 filteredList.addAll(originalList);
-
-
             } else {
+                //Search by string
                 final String filterPattern = constraint.toString().toLowerCase().trim();
-
                 for (final Artist artist : originalList) {
-                    if (artist.name.toLowerCase().contains(filterPattern.toLowerCase())) {
+                    if (artist.name.toLowerCase().contains(filterPattern)) {
                         filteredList.add(artist);
-
-
                     }
                 }
             }
@@ -285,7 +275,6 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            Logger.e("publishResults ");
             adapter.animateTo((ArrayList<Artist>) results.values);
             if (adapter.mFilterListener != null) {
                 adapter.mFilterListener.onFilterFinish();

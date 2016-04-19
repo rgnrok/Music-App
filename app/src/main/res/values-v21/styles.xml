@@ -1,4 +1,5 @@
 <resources>>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -6,22 +7,20 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
 
         <!-- enable window content transitions -->
-        <item name="android:windowContentTransitions">false</item>
-        <!--<item name="android:windowAllowEnterTransitionOverlap">true</item>-->
-        <!--<item name="android:windowAllowReturnTransitionOverlap">true</item>-->
-
+        <item name="android:windowContentTransitions">true</item>
 
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">
-            @transition/your_transition</item>
-        <item name="android:windowSharedElementExitTransition">
-            @transition/your_transition</item>
+            @transition/artist_image_transition
+        </item>
+        <item name="android:windowSharedElementExitTransition">@transition/artist_image_transition
+        </item>
         <item name="android:windowSharedElementReenterTransition">
-            @transition/your_transition</item>
+            @transition/artist_image_transition
+        </item>
         <item name="android:windowSharedElementReturnTransition">
-            @transition/your_transition</item>
-
-
+            @transition/artist_image_transition
+        </item>
 
     </style>
 

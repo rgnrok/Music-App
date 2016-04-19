@@ -1,4 +1,4 @@
-package com.example.pgorbach.yandexmusicschool.api;
+package com.example.pgorbach.yandexmusicschool.api.interceptors;
 
 import com.orhanobut.logger.Logger;
 
@@ -10,7 +10,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 
-
+//Log debug info
 public class LogInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -26,6 +26,7 @@ public class LogInterceptor implements Interceptor {
         String msg = response.body().string();
         Logger.d(String.format("Response from %s in %.1fms%n\n%s",
                 response.request().url().toString(), (t2 - t1) / 1e6d, msg));
+
         return response.newBuilder()
                 .body(ResponseBody.create(response.body().contentType(), msg))
                 .build();

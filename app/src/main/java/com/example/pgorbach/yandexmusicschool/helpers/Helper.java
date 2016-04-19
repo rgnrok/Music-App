@@ -3,7 +3,6 @@ package com.example.pgorbach.yandexmusicschool.helpers;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.telephony.TelephonyManager;
 
 
 public class Helper {
@@ -17,7 +16,7 @@ public class Helper {
             return false;
         }
 
-        // Only update if WiFi or 3G is connected and not roaming
+        // Only update if WiFi or 3G is connected
         int netType = info.getType();
         if (netType == ConnectivityManager.TYPE_WIFI) {
             return info.isConnected();

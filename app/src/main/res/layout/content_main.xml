@@ -24,18 +24,16 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
 
-
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
-        app:layout_behavior="com.example.pgorbach.yandexmusicschool.ScrollAwareFABBehavior"
         android:id="@+id/fab_up"
+        style="@style/FloatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_navigation_up"
         app:layout_anchor="@+id/artist_list"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"
+        app:layout_behavior="com.example.pgorbach.yandexmusicschool.ScrollAwareFABBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.fab_up)
     FloatingActionButton fabUp;
 
-    private ArtistAdapter mArtistAdapter;
-
+    protected ArtistAdapter mArtistAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         mRvArtists.addItemDecoration(new SimpleDividerItemDecoration(this));
         mRvArtists.setLayoutManager(new LinearLayoutManager(this));
 
-        // specify an adapter (see also next example)
         mArtistAdapter = new ArtistAdapter();
         mArtistAdapter.setFilterListener(new ArtistAdapter.FilterFinishListener() {
             @Override
@@ -74,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mRvArtists.setAdapter(mArtistAdapter);
+        //Init load data
         updateList();
+
         mRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
                 if (response.isSuccessful()) {
-                    Logger.e("updateList");
                     mArtistAdapter.clear();
                     mArtistAdapter.addAll(response.body());
                     mRvArtists.scrollToPosition(0);
+
                     mRefreshLayout.setRefreshing(false);
                 }
             }
