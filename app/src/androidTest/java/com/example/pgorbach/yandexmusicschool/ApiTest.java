@@ -27,12 +27,13 @@ public class ApiTest {
             for (Artist artist: response.body()) {
                 Assert.assertNotNull(artist.name);
                 Assert.assertNotNull(artist.name + " has empty description", artist.description);
+                Assert.assertNotNull(artist.name + " hasn't cover", artist.cover);
                 Assert.assertNotNull(artist.name + " hasn't small cover", artist.cover.get(Artist.COVER_SMALL));
                 Assert.assertNotNull(artist.name + " hasn't big cover", artist.cover.get(Artist.COVER_BIG));
                 Assert.assertNotEquals(artist.name + " has empty genres", artist.genres.length, 0);
 
                 if (artist.albums == 0) {
-                    Assert.assertNotEquals(artist.tracks, 0);
+                    Assert.assertNotEquals(artist.name + " has empty albums and tracks", artist.tracks, 0);
                 }
             }
         } catch (IOException e) {

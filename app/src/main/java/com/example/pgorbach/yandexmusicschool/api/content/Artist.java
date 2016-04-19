@@ -50,6 +50,10 @@ public class Artist implements Parcelable {
         return mBuilder.toString();
     }
 
+    public Artist() {
+
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -65,8 +69,8 @@ public class Artist implements Parcelable {
         dest.writeInt(albums);
         dest.writeString(link);
         dest.writeString(description);
-        dest.writeString(cover.get(COVER_SMALL));
-        dest.writeString(cover.get(COVER_BIG));
+        dest.writeString(cover != null ? cover.get(COVER_SMALL) : null);
+        dest.writeString(cover != null ? cover.get(COVER_BIG) : null);
     }
 
     protected Artist(Parcel in) {
