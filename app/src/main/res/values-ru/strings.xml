@@ -5,6 +5,7 @@
     <string name="sync_error">Ошибка подключения. Проверьте наличие интернета и повторите попытку</string>
     <string name="artist_description_label">Биография</string>
     <string name="menu_search">Поиск</string>
+    <string name="empty_search_text">Нет результатов</string>
 
     <plurals name="albums_count">
         <item quantity="one">%d альбом</item>

@@ -22,7 +22,6 @@ import com.example.pgorbach.yandexmusicschool.DetailActivity;
 import com.example.pgorbach.yandexmusicschool.MainActivity;
 import com.example.pgorbach.yandexmusicschool.R;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +43,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     //Called when the available search results
     public interface FilterFinishListener {
-        void onFilterFinish();
+        void onFilterFinish(List<Artist> results);
     }
 
     // Provide a reference to the views for each data item
@@ -108,8 +107,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ArtistAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                       int viewType) {
+    public ArtistAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.artist_item, parent, false);
@@ -134,7 +132,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
                 .load(mArtist.cover.get(Artist.COVER_SMALL))
                 .centerCrop()
                 .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.mIvArtistImage);
 
         setAnimation(holder.mRlWrapper, position, holder.mContext);
@@ -240,44 +238,44 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     protected static class ArtistFilter extends Filter {
 
-        protected final ArtistAdapter adapter;
-        protected final List<Artist> originalList;
-        protected final List<Artist> filteredList;
+        protected final ArtistAdapter mAdapter;
+        protected final List<Artist> mOriginalList;
+        protected final List<Artist> mFilteredList;
 
         protected ArtistFilter(ArtistAdapter adapter, List<Artist> originalList) {
             super();
-            this.adapter = adapter;
-            this.originalList = new LinkedList<>(originalList);
-            this.filteredList = new ArrayList<>();
+            this.mAdapter = adapter;
+            this.mOriginalList = new LinkedList<>(originalList);
+            this.mFilteredList = new ArrayList<>();
         }
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             final FilterResults results = new FilterResults();
-            filteredList.clear();
+            mFilteredList.clear();
 
-            //If search text is empty
+            //If search text is empty return basic list
             if (constraint.length() == 0) {
-                filteredList.addAll(originalList);
+                mFilteredList.addAll(mOriginalList);
             } else {
                 //Search by string
                 final String filterPattern = constraint.toString().toLowerCase().trim();
-                for (final Artist artist : originalList) {
+                for (final Artist artist : mOriginalList) {
                     if (artist.name.toLowerCase().contains(filterPattern)) {
-                        filteredList.add(artist);
+                        mFilteredList.add(artist);
                     }
                 }
             }
-            results.values = filteredList;
-            results.count = filteredList.size();
+            results.values = mFilteredList;
+            results.count = mFilteredList.size();
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            adapter.animateTo((ArrayList<Artist>) results.values);
-            if (adapter.mFilterListener != null) {
-                adapter.mFilterListener.onFilterFinish();
+            mAdapter.animateTo((ArrayList<Artist>) results.values);
+            if (mAdapter.mFilterListener != null) {
+                mAdapter.mFilterListener.onFilterFinish((ArrayList<Artist>) results.values);
             }
         }
     }

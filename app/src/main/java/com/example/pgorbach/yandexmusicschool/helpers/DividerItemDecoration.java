@@ -9,10 +9,10 @@ import android.view.View;
 
 import com.example.pgorbach.yandexmusicschool.R;
 
-public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
+public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 
-    public SimpleDividerItemDecoration(Context context) {
+    public DividerItemDecoration(Context context) {
         mDivider = ContextCompat.getDrawable(context, R.drawable.line_divider);
     }
 

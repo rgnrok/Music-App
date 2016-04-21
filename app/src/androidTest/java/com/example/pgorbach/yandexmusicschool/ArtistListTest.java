@@ -31,7 +31,9 @@ import android.widget.EditText;
 
 
 import android.support.test.espresso.matcher.BoundedMatcher;
+
 import static org.hamcrest.core.Is.is;
+
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
 import com.orhanobut.logger.Logger;
 
@@ -55,22 +57,24 @@ public class ArtistListTest {
     @Test
     public void changeText_sameActivity() {
 
-
         String artistName = "Usher";
         String searchString = "Nirvana";
+
         Matcher<View> mRecyclerViewMatcher = ViewMatchers.withId(R.id.artist_list);
 
+        //Scroll down and check that the button "up" is not visible
         Espresso.onView(mRecyclerViewMatcher).perform(
                 RecyclerViewActions.scrollToPosition(10));
         Espresso.onView(ViewMatchers.withId(R.id.fab_up)).check(
                 ViewAssertions.matches(withVisible(is(View.GONE))));
 
+        //Scroll up and check that the button "up" is visible
         Espresso.onView(mRecyclerViewMatcher).perform(
-                RecyclerViewActions.scrollToPosition(0));
+                RecyclerViewActions.scrollToPosition(5));
         Espresso.onView(ViewMatchers.withId(R.id.fab_up)).check(
                 ViewAssertions.matches(withVisible(is(View.VISIBLE))));
 
-
+        //Click on item with artist name and check that detail activity has correct toolbar title
         Espresso.onView(mRecyclerViewMatcher)
                 .perform(RecyclerViewActions.actionOnItem(
                         ViewMatchers.hasDescendant(ViewMatchers.withText(artistName)), ViewActions.click()));
@@ -80,6 +84,7 @@ public class ArtistListTest {
 
         Espresso.pressBack();
 
+        //Search and check result count and toolbar title after click on result
         Espresso.onView(ViewMatchers.withId(R.id.action_search)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.isAssignableFrom(EditText.class)).perform(ViewActions.typeText(searchString), ViewActions.pressKey(KeyEvent.KEYCODE_ENTER));
 
@@ -94,11 +99,10 @@ public class ArtistListTest {
     }
 
 
-
-
     public static ViewAssertion hasItemsCount(final int count) {
         return new ViewAssertion() {
-            @Override public void check(View view, NoMatchingViewException e) {
+            @Override
+            public void check(View view, NoMatchingViewException e) {
                 if (!(view instanceof RecyclerView)) {
                     throw e;
                 }
@@ -108,14 +112,16 @@ public class ArtistListTest {
         };
     }
 
- 
 
     private static Matcher<Object> withVisible(final Matcher<Integer> visibilityMatcher) {
         return new BoundedMatcher<Object, View>(View.class) {
-            @Override public boolean matchesSafely(View view) {
+            @Override
+            public boolean matchesSafely(View view) {
                 return visibilityMatcher.matches(view.getVisibility());
             }
-            @Override public void describeTo(Description description) {
+
+            @Override
+            public void describeTo(Description description) {
                 description.appendText("does not equals correct visibility: ");
                 visibilityMatcher.describeTo(description);
             }
@@ -124,10 +130,13 @@ public class ArtistListTest {
 
     private static Matcher<Object> withCollapsingToolbarLayoutTitle(final Matcher<CharSequence> textMatcher) {
         return new BoundedMatcher<Object, CollapsingToolbarLayout>(CollapsingToolbarLayout.class) {
-            @Override public boolean matchesSafely(CollapsingToolbarLayout toolbar) {
+            @Override
+            public boolean matchesSafely(CollapsingToolbarLayout toolbar) {
                 return textMatcher.matches(toolbar.getTitle());
             }
-            @Override public void describeTo(Description description) {
+
+            @Override
+            public void describeTo(Description description) {
                 description.appendText("with toolbar title: ");
                 textMatcher.describeTo(description);
             }

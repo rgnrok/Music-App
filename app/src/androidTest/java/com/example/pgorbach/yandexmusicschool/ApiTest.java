@@ -24,7 +24,7 @@ public class ApiTest {
             Assert.assertTrue(response.isSuccessful());
             Assert.assertNotEquals(response.body().size(), 0);
 
-            for (Artist artist: response.body()) {
+            for (Artist artist : response.body()) {
                 Assert.assertNotNull(artist.name);
                 Assert.assertNotNull(artist.name + " has empty description", artist.description);
                 Assert.assertNotNull(artist.name + " hasn't cover", artist.cover);

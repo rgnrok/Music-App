@@ -22,6 +22,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
+import com.example.pgorbach.yandexmusicschool.helpers.Helper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -83,12 +84,13 @@ public class DetailActivity extends AppCompatActivity {
                     .append(getResources().getQuantityString(R.plurals.tracks_count, mArtist.tracks, mArtist.tracks));
             mTvTracks.setText(mBuilder.toString());
 
+            String imageSize = Helper.isNetworkAvailable(this) ? Artist.COVER_BIG : Artist.COVER_SMALL;
             //Start animation transition after glide get response
             Glide.with(this)
-                    .load(mArtist.cover.get(Artist.COVER_BIG))
+                    .load(mArtist.cover.get(imageSize))
                     .asBitmap()
                     .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .listener(new RequestListener<String, Bitmap>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {

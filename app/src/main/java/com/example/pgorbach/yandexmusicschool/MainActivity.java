@@ -2,7 +2,6 @@ package com.example.pgorbach.yandexmusicschool;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
@@ -17,14 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.AbsListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pgorbach.yandexmusicschool.adapters.ArtistAdapter;
 import com.example.pgorbach.yandexmusicschool.api.ApiFactory;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
 import com.example.pgorbach.yandexmusicschool.helpers.HidingScrollListener;
-import com.example.pgorbach.yandexmusicschool.helpers.SimpleDividerItemDecoration;
+import com.example.pgorbach.yandexmusicschool.helpers.DividerItemDecoration;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -52,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.fab_up)
     FloatingActionButton fabUp;
 
+    @Bind(R.id.empty_search_result)
+    TextView mTvEmptySearchResult;
+
     protected ArtistAdapter mArtistAdapter;
 
     @Override
@@ -62,23 +64,23 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
 
-        mRvArtists.setNestedScrollingEnabled(true);
         mRvArtists.setHasFixedSize(true);
-        mRvArtists.addItemDecoration(new SimpleDividerItemDecoration(this));
+        mRvArtists.addItemDecoration(new DividerItemDecoration(this));
         mRvArtists.setLayoutManager(new LinearLayoutManager(this));
 
 
         mArtistAdapter = new ArtistAdapter();
         mArtistAdapter.setFilterListener(new ArtistAdapter.FilterFinishListener() {
+            //After search complete
             @Override
-            public void onFilterFinish() {
+            public void onFilterFinish(List<Artist> results) {
                 mRvArtists.scrollToPosition(0);
+                mTvEmptySearchResult.setVisibility(results.size() == 0 ? View.VISIBLE : View.GONE);
             }
         });
         mRvArtists.setAdapter(mArtistAdapter);
@@ -194,6 +196,5 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 }

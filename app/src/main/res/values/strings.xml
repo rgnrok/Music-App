@@ -5,10 +5,11 @@
     <string name="app_name">Yandex Music School</string>
     <string name="artist_image_description">Artist Image</string>
     <string name="menu_refresh">Refresh</string>
-    <string name="sync_error">Ошибка подключения. Проверьте наличие интернета и повторите попытку</string>
-    <string name="artist_description_label">Биография</string>
-    <string name="search_hint">hint</string>
+    <string name="sync_error">Connection error. Check the internet and try again</string>
+    <string name="artist_description_label">Biography</string>
     <string name="menu_search">Search</string>
+    <string name="empty_search_text">No results</string>
+
 
     <plurals name="albums_count">
         <item quantity="one">%d album</item>

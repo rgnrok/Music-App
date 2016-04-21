@@ -18,11 +18,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiFactory {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final boolean USE_CACHE = true;
 
     private static final int CONNECT_TIMEOUT = 10;
-    private static final int READ_TIMEOUT = 60;
+    private static final int READ_TIMEOUT = 6;
     private static final int CACHE_SIZE = 2 * 1024 * 1024;
 
     private static OkHttpClient CLIENT;
@@ -39,7 +39,6 @@ public class ApiFactory {
     private static Retrofit getRetrofit(Context context) {
 
         if (CLIENT == null) {
-
             OkHttpClient.Builder builder = new OkHttpClient.Builder()
                     .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS);
@@ -57,7 +56,6 @@ public class ApiFactory {
 
             CLIENT = builder.build();
         }
-
 
         return new Retrofit.Builder()
                 .baseUrl(API_ENDPOINT)
