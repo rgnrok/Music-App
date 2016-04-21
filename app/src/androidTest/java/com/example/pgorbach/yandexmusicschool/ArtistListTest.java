@@ -57,7 +57,7 @@ public class ArtistListTest {
 
 
         String artistName = "Usher";
-        String searchString = "nirvana";
+        String searchString = "Nirvana";
         Matcher<View> mRecyclerViewMatcher = ViewMatchers.withId(R.id.artist_list);
 
         Espresso.onView(mRecyclerViewMatcher).perform(
@@ -66,7 +66,7 @@ public class ArtistListTest {
                 ViewAssertions.matches(withVisible(is(View.GONE))));
 
         Espresso.onView(mRecyclerViewMatcher).perform(
-                RecyclerViewActions.scrollToPosition(1));
+                RecyclerViewActions.scrollToPosition(0));
         Espresso.onView(ViewMatchers.withId(R.id.fab_up)).check(
                 ViewAssertions.matches(withVisible(is(View.GONE))));
 

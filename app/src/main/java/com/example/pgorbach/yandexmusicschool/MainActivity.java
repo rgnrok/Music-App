@@ -2,6 +2,8 @@ package com.example.pgorbach.yandexmusicschool;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,12 +17,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.Toast;
 
 import com.example.pgorbach.yandexmusicschool.adapters.ArtistAdapter;
 import com.example.pgorbach.yandexmusicschool.api.ApiFactory;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
+import com.example.pgorbach.yandexmusicschool.helpers.HidingScrollListener;
 import com.example.pgorbach.yandexmusicschool.helpers.SimpleDividerItemDecoration;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -31,6 +36,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    @Bind(R.id.main_content)
+    CoordinatorLayout mClContent;
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -60,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
 
+        mRvArtists.setNestedScrollingEnabled(true);
         mRvArtists.setHasFixedSize(true);
         mRvArtists.addItemDecoration(new SimpleDividerItemDecoration(this));
         mRvArtists.setLayoutManager(new LinearLayoutManager(this));
+
 
         mArtistAdapter = new ArtistAdapter();
         mArtistAdapter.setFilterListener(new ArtistAdapter.FilterFinishListener() {
@@ -88,6 +98,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mRvArtists.scrollToPosition(0);
+            }
+        });
+
+        mRvArtists.addOnScrollListener(new HidingScrollListener() {
+            @Override
+            public void onHide() {
+                fabUp.hide();
+            }
+
+            @Override
+            public void onShow() {
+                fabUp.show();
             }
         });
     }

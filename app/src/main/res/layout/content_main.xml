@@ -34,6 +34,6 @@
         android:src="@drawable/ic_navigation_up"
         app:layout_anchor="@+id/artist_list"
         app:layout_anchorGravity="bottom|end"
-        app:layout_behavior="com.example.pgorbach.yandexmusicschool.helpers.ScrollAwareFABBehavior" />
+        />
 
 </android.support.design.widget.CoordinatorLayout>
