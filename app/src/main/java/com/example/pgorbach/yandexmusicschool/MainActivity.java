@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.pgorbach.yandexmusicschool.adapters.ArtistAdapter;
 import com.example.pgorbach.yandexmusicschool.api.ApiFactory;
 import com.example.pgorbach.yandexmusicschool.api.content.Artist;
-import com.orhanobut.logger.Logger;
+import com.example.pgorbach.yandexmusicschool.helpers.SimpleDividerItemDecoration;
 
 import java.util.List;
 

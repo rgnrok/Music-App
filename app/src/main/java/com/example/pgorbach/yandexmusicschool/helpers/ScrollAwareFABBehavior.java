@@ -1,4 +1,4 @@
-package com.example.pgorbach.yandexmusicschool;
+package com.example.pgorbach.yandexmusicschool.helpers;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
