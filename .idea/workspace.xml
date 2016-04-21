@@ -26,14 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e06330a-f504-419e-af89-d8643584d7c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/helpers/HidingScrollListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/pgorbach/yandexmusicschool/ArtistListTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/pgorbach/yandexmusicschool/ArtistListTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/helpers/ScrollAwareFABBehavior.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/helpers/ScrollAwareFABBehavior.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/helpers/HidingScrollListener.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/helpers/HidingScrollListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="yandexschool.iws" />
@@ -59,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/pgorbach/yandexmusicschool/ArtistListTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -139,8 +133,8 @@
       <file leaf-file-name="HidingScrollListener.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/helpers/HidingScrollListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17985612">
-              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.5851319">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2441,7 +2435,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="60" y="52" width="1845" height="1013" extended-state="1" />
+    <frame x="60" y="52" width="1845" height="1013" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2450,7 +2444,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Fabric" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49775282" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49775282" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2465,7 +2459,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2495831" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32611173" sideWeight="0.49806523" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258427" sideWeight="0.49806523" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2700,6 +2694,48 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#58450#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2110#2111#0" expanded="false" />
+            <element signature="e#2167#2168#0" expanded="false" />
+            <element signature="e#2794#2795#0" expanded="false" />
+            <element signature="e#2879#2880#0" expanded="false" />
+            <element signature="e#19077#19078#0" expanded="false" />
+            <element signature="e#19134#19135#0" expanded="false" />
+            <element signature="e#27409#27410#0" expanded="false" />
+            <element signature="e#27442#27443#0" expanded="false" />
+            <element signature="e#30964#30965#0" expanded="false" />
+            <element signature="e#30992#30993#0" expanded="false" />
+            <element signature="e#37343#37344#0" expanded="false" />
+            <element signature="e#37387#37388#0" expanded="false" />
+            <element signature="e#40011#40012#0" expanded="false" />
+            <element signature="e#40083#40084#0" expanded="false" />
+            <element signature="e#40906#40907#0" expanded="false" />
+            <element signature="e#40965#40966#0" expanded="false" />
+            <element signature="e#41055#41056#0" expanded="false" />
+            <element signature="e#41082#41083#0" expanded="false" />
+            <element signature="e#41415#41416#0" expanded="false" />
+            <element signature="e#41494#41495#0" expanded="false" />
+            <element signature="e#42322#42323#0" expanded="false" />
+            <element signature="e#42388#42389#0" expanded="false" />
+            <element signature="e#44429#44430#0" expanded="false" />
+            <element signature="e#44474#44475#0" expanded="false" />
+            <element signature="e#44600#44601#0" expanded="false" />
+            <element signature="e#44644#44645#0" expanded="false" />
+            <element signature="e#44766#44767#0" expanded="false" />
+            <element signature="e#44812#44813#0" expanded="false" />
+            <element signature="e#44936#44937#0" expanded="false" />
+            <element signature="e#44979#44980#0" expanded="false" />
+            <element signature="e#45385#45386#0" expanded="false" />
+            <element signature="e#45449#45450#0" expanded="false" />
+            <element signature="e#45796#45797#0" expanded="false" />
+            <element signature="e#45843#45844#0" expanded="false" />
+            <element signature="e#50307#50308#0" expanded="false" />
+            <element signature="e#50357#50358#0" expanded="false" />
+            <element signature="e#51666#51667#0" expanded="false" />
+            <element signature="e#51710#51711#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2905,15 +2941,15 @@
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/pgorbach/yandexmusicschool/ArtistListTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pgorbach/yandexmusicschool/helpers/HidingScrollListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17985612">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.5851319">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

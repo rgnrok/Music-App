@@ -12,25 +12,28 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         Logger.e("dy  " + dy);
+        int totalCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getItemCount();
+        if (totalCount <= 5) {
+            if (controlsVisible) {
+                onHide();
+                controlsVisible = false;
+            }
+        }
         int firstVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
         Logger.e("firstVisibleItem " + firstVisibleItem + ", " + prevFirstItemVisible);
-        if (firstVisibleItem <= prevFirstItemVisible) {
+        if (firstVisibleItem == 0 || firstVisibleItem < prevFirstItemVisible) {
             if(!controlsVisible) {
                 onShow();
                 controlsVisible = true;
             }
         } else {
-            if (dy >= 0) {
-                if (controlsVisible) {
-                    onHide();
-                    controlsVisible = false;
-                }
-            } else {
-                if (!controlsVisible) {
-                    onShow();
-                    controlsVisible = true;
-                }
-            }
+if (firstVisibleItem != prevFirstItemVisible) {
+    if (controlsVisible) {
+        onHide();
+        controlsVisible = false;
+    }
+}
+
         }
         prevFirstItemVisible = firstVisibleItem;
     }

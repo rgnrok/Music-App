@@ -68,7 +68,7 @@ public class ArtistListTest {
         Espresso.onView(mRecyclerViewMatcher).perform(
                 RecyclerViewActions.scrollToPosition(0));
         Espresso.onView(ViewMatchers.withId(R.id.fab_up)).check(
-                ViewAssertions.matches(withVisible(is(View.GONE))));
+                ViewAssertions.matches(withVisible(is(View.VISIBLE))));
 
 
         Espresso.onView(mRecyclerViewMatcher)
@@ -78,13 +78,7 @@ public class ArtistListTest {
         Espresso.onView(ViewMatchers.isAssignableFrom(CollapsingToolbarLayout.class))
                 .check(ViewAssertions.matches(withCollapsingToolbarLayoutTitle(is((CharSequence) artistName))));
 
-        //        // Check that the text was changed.
-//        Espresso.onView(ViewMatchers.withText("Usher"))
-//                .check(ViewAssertions.matches(ViewMatchers.withText("Usher")));
-
-//        Espresso.onView(ViewMatchers.withContentDescription("Navigate up")).perform(ViewActions.click());
         Espresso.pressBack();
-//        Espresso.onView(ViewMatchers.withContentDescription(R.string.abc_action_bar_up_description)).perform(ViewActions.click());
 
         Espresso.onView(ViewMatchers.withId(R.id.action_search)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.isAssignableFrom(EditText.class)).perform(ViewActions.typeText(searchString), ViewActions.pressKey(KeyEvent.KEYCODE_ENTER));
@@ -97,14 +91,6 @@ public class ArtistListTest {
         Espresso.onView(ViewMatchers.isAssignableFrom(CollapsingToolbarLayout.class))
                 .check(ViewAssertions.matches(withCollapsingToolbarLayoutTitle(is((CharSequence) searchString))));
 
-//        // Type text and then press the button.
-//        Espresso.onView(ViewMatchers.withId(R.id.editTextUserInput))
-//                .perform(typeText(mStringToBetyped), closeSoftKeyboard());
-//        Espresso.onView(withId(R.id.changeTextBt)).perform(click());
-//
-//        // Check that the text was changed.
-//        onView(withId(R.id.textToBeChanged))
-//                .check(matches(withText(mStringToBetyped)));
     }
 
 
