@@ -132,7 +132,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
                 .load(mArtist.cover.get(Artist.COVER_SMALL))
                 .centerCrop()
                 .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(holder.mIvArtistImage);
 
         setAnimation(holder.mRlWrapper, position, holder.mContext);

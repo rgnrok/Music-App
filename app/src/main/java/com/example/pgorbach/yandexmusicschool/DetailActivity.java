@@ -90,7 +90,7 @@ public class DetailActivity extends AppCompatActivity {
                     .load(mArtist.cover.get(imageSize))
                     .asBitmap()
                     .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .listener(new RequestListener<String, Bitmap>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {
